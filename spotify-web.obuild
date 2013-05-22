@@ -1,0 +1,8 @@
+name: spotify-web
+version: 0.1.0
+synopsis: Library for interacting with the Spotify web API
+obuild-ver: 1
+
+library spotify_web
+  src-dir: lib
+  modules: spotify_web_lookup, spotify_web_search
