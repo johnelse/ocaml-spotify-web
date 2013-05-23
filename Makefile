@@ -4,7 +4,7 @@ SEARCH_MARSHAL=lib/search_j.ml
 SEARCH_TYPES=lib/search_t.ml
 SEARCH=$(SEARCH_MARSHAL) $(SEARCH_TYPES)
 
-dist/build/lib-spotify-web/spotify-web: $(SEARCH)
+dist/build/lib-spotify_web/spotify_web.cma: $(SEARCH)
 	obuild configure
 	obuild build
 
