@@ -1,7 +1,7 @@
 .PHONY: install uninstall clean
 
-SEARCH_MARSHAL=lib/search_j.ml
-SEARCH_TYPES=lib/search_t.ml
+SEARCH_MARSHAL=lib/spotify_search_j.ml
+SEARCH_TYPES=lib/spotify_search_t.ml
 SEARCH=$(SEARCH_MARSHAL) $(SEARCH_TYPES)
 
 dist/build/lib-spotify_web/spotify_web.cma: $(SEARCH)
@@ -9,10 +9,10 @@ dist/build/lib-spotify_web/spotify_web.cma: $(SEARCH)
 	obuild build
 
 $(SEARCH_MARSHAL):
-	atdgen -j lib/search.atd
+	atdgen -j lib/spotify_search.atd
 
 $(SEARCH_TYPES):
-	atdgen -t lib/search.atd
+	atdgen -t lib/spotify_search.atd
 
 install:
 	ocamlfind install spotify-web lib/META \

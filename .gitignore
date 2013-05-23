@@ -1,5 +1,5 @@
-search_j.*
-search_t.*
+lib/spotify_search_j.*
+lib/spotify_search_t.*
 *.swp
 
 dist
