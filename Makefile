@@ -22,6 +22,6 @@ uninstall:
 	ocamlfind remove spotify-web
 
 clean:
-	rm -f lib/search_j.ml*
-	rm -f lib/search_t.ml*
+	rm -f lib/spotify_search_j.ml*
+	rm -f lib/spotify_search_t.ml*
 	rm -rf dist
