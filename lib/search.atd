@@ -1,0 +1,4 @@
+type artist = {
+  href: string;
+  name: string;
+}
