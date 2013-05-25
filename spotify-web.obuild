@@ -3,12 +3,7 @@ version: 0.1.0
 synopsis: Library for interacting with the Spotify web API
 obuild-ver: 1
 
-library spotify_web_gen
-  src-dir: gen
-  modules: spotify_search_t, spotify_search_j
-  build-deps: atdgen, biniou, yojson
-
 library spotify_web
   src-dir: lib
-  modules: spotify_lookup, spotify_search
-  build-deps: spotify_web_gen
+  modules: spotify_search_t, spotify_search_j, spotify_lookup, spotify_search
+  build-deps: atdgen, biniou, yojson
