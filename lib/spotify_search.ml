@@ -1,26 +1,32 @@
 module C = Cohttp_lwt_unix
 open Cohttp_lwt_unix_io
 
-exception No_response
-
 let base_url = "http://ws.spotify.com/search/1/"
 
-let search_albums query =
-  let uri = Uri.of_string (Printf.sprintf "%salbum.json?q=%s" base_url query) in
+type search_mode = [ `album | `artist | `track ]
+
+let string_of_mode = function
+  | `album -> "album"
+  | `artist -> "artist"
+  | `track -> "track"
+
+exception No_response
+
+let search mode query parse_fn =
+  let uri = Uri.of_string
+    (Printf.sprintf "%s%s.json?q=%s"
+      base_url (string_of_mode mode) query)
+  in
   C.Client.call ~chunked:false `GET uri
   >>= (fun result ->
     match result with
     | Some (_, body) ->
       C.Body.string_of_body body
-      >>= (fun data -> return (Spotify_search_j.album_search_of_string data))
+      >>= (fun data -> return (parse_fn data))
     | None -> Lwt.fail No_response)
 
+let search_albums query =
+  search `album query Spotify_search_j.album_search_of_string
+
 let search_artists query =
-  let uri = Uri.of_string (Printf.sprintf "%sartist.json?q=%s" base_url query) in
-  C.Client.call ~chunked:false `GET uri
-  >>= (fun result ->
-    match result with
-    | Some (_, body) ->
-      C.Body.string_of_body body
-      >>= (fun data -> return (Spotify_search_j.artist_search_of_string data))
-    | None -> Lwt.fail No_response)
+  search `artist query Spotify_search_j.artist_search_of_string
