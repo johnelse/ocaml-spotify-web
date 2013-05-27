@@ -9,7 +9,7 @@ type search_info = {
 
 type external_id = {
   id_type <json name="type">: string;
-  id: int;
+  id: string;
 }
 
 type artist = {
