@@ -30,3 +30,6 @@ let search_albums query =
 
 let search_artists query =
   search `artist query Spotify_search_j.artist_search_of_string
+
+let search_tracks query =
+  search `track query Spotify_search_j.track_search_of_string

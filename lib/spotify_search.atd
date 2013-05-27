@@ -24,12 +24,24 @@ type availability = {
 
 type album = {
   name <json name="name">: string;
-  popularity: float;
-  external_ids <json name="external-ids">: external_id list;
+  ?released: int option;
+  ?popularity: float option;
+  ?external_ids <json name="external-ids">: external_id list option;
   href <json name="href">: string;
-  artists: artist list;
+  ?artists: artist list option;
   availability: availability;
 } <ocaml field_prefix="album_">
+
+type track = {
+  album: album;
+  name: string;
+  popularity: float;
+  external_ids <json name="external-ids">: external_id list;
+  length: float;
+  href: string;
+  artists: artist list;
+  number <json name="track-number">: int;
+} <ocaml field_prefix="track_">
 
 type album_search = {
   album_search_info <json name="info">: search_info;
@@ -39,4 +51,9 @@ type album_search = {
 type artist_search = {
   artist_search_info <json name="info">: search_info;
   artists: artist list;
+}
+
+type track_search = {
+  track_search_info <json name="info">: search_info;
+  tracks: track list;
 }
