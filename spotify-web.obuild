@@ -6,4 +6,4 @@ obuild-ver: 1
 library spotify_web
   src-dir: lib
   modules: spotify_search_t, spotify_search_j, spotify_lookup, spotify_search
-  build-deps: atdgen, biniou, yojson
+  build-deps: atdgen, biniou, yojson, uri, cohttp.lwt

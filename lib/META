@@ -1,6 +1,6 @@
 version = "0.1.0"
 description = "Spotify web search client library"
-requires = "atdgen, biniou, yojson"
+requires = "atdgen, biniou, yojson, uri, cohttp.lwt"
 archive(byte) = "spotify_web.cma"
 archive(byte, plugin) = "spotify_web.cma"
 archive(native) = "spotify_web.cmxa"
