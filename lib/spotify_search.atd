@@ -13,8 +13,8 @@ type external_id = {
 }
 
 type artist = {
-  artist_href <json name="href">: string;
-  artist_name <json name="name">: string;
+  ?artist_href <json name="href">: string option;
+  ~artist_name <json name="name">: string;
 }
 
 type availability = {
