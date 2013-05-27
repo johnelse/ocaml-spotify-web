@@ -1,1 +1,1 @@
-let base_url = "http://ws.spotify.com/lookup/1/"
+let base_uri = "http://ws.spotify.com/lookup/1/"

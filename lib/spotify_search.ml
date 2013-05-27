@@ -1,7 +1,7 @@
 module C = Cohttp_lwt_unix
 open Cohttp_lwt_unix_io
 
-let base_url = "http://ws.spotify.com/search/1/"
+let base_uri = "http://ws.spotify.com/search/1/"
 
 type search_mode = [ `album | `artist | `track ]
 
@@ -15,7 +15,7 @@ exception No_response
 let search mode query parse_fn =
   let uri = Uri.of_string
     (Printf.sprintf "%s%s.json?q=%s"
-      base_url (string_of_mode mode) query)
+      base_uri (string_of_mode mode) query)
   in
   C.Client.call ~chunked:false `GET uri
   >>= (fun result ->
