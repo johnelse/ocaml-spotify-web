@@ -13,24 +13,30 @@ type external_id = {
 }
 
 type artist = {
-  ?artist_href <json name="href">: string option;
-  ~artist_name <json name="name">: string;
-}
+  ?href <json name="href">: string option;
+  ~name <json name="name">: string;
+  ?popularity: float option;
+} <ocaml field_prefix="artist_">
 
 type availability = {
   territories: string;
 }
 
 type album = {
-  album_name <json name="name">: string;
+  name <json name="name">: string;
   popularity: float;
   external_ids <json name="external-ids">: external_id list;
-  album_href <json name="href">: string;
+  href <json name="href">: string;
   artists: artist list;
   availability: availability;
-}
+} <ocaml field_prefix="album_">
 
 type album_search = {
-  info: search_info;
+  album_search_info <json name="info">: search_info;
   albums: album list;
+}
+
+type artist_search = {
+  artist_search_info <json name="info">: search_info;
+  artists: artist list;
 }
