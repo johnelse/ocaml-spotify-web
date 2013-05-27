@@ -1,4 +1,36 @@
+type search_info = {
+  num_results: int;
+  limit: int;
+  offset: int;
+  query: string;
+  search_type <json name="type">: string;
+  page: int;
+}
+
+type external_id = {
+  id_type <json name="type">: string;
+  id: int;
+}
+
 type artist = {
-  href: string;
-  name: string;
+  artist_href <json name="href">: string;
+  artist_name <json name="name">: string;
+}
+
+type availability = {
+  territories: string;
+}
+
+type album = {
+  album_name <json name="name">: string;
+  popularity: float;
+  external_ids <json name="external-ids">: external_id list;
+  album_href <json name="href">: string;
+  artists: artist list;
+  availability: availability;
+}
+
+type album_search = {
+  info: search_info;
+  albums: album list;
 }
