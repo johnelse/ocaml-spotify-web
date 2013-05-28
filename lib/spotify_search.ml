@@ -21,7 +21,7 @@ let search mode query parse_fn =
   >>= (fun result ->
     match result with
     | Some (_, body) ->
-      C.Body.string_of_body body
+      Cohttp_lwt_body.string_of_body body
       >>= (fun data -> return (parse_fn data))
     | None -> Lwt.fail No_response)
 
