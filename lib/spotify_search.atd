@@ -36,7 +36,7 @@ type track = {
   album: album;
   name: string;
   popularity: float;
-  external_ids <json name="external-ids">: external_id list;
+  ?external_ids <json name="external-ids">: external_id list option;
   length: float;
   href: string;
   artists: artist list;
