@@ -1,5 +1,4 @@
 module C = Cohttp_lwt_unix
-open Cohttp_lwt_unix_io
 
 let base_uri = "http://ws.spotify.com/search/1/"
 
@@ -13,6 +12,7 @@ let string_of_mode = function
 exception No_response
 
 let search mode query parse_fn =
+  let open Cohttp_lwt_unix_io in
   let uri = Uri.of_string
     (Printf.sprintf "%s%s.json?q=%s"
       base_uri (string_of_mode mode) query)
