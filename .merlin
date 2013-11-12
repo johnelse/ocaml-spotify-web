@@ -1,0 +1,4 @@
+PKG atdgen biniou yojson uri cohttp.lwt
+S lib
+
+B dist/build/lib-spotify_web
