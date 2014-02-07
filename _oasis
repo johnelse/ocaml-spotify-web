@@ -12,7 +12,7 @@ Library spotify_web
   CompiledObject:        best
   Path:                  lib
   Findlibname:           spotify-web
-  Modules:               Spotify_search_t, Spotify_search_j, Spotify_lookup, Spotify_search
+  Modules:               Spotify_lookup_t, Spotify_lookup_j, Spotify_search_t, Spotify_search_j, Spotify_common, Spotify_lookup, Spotify_search
   ByteOpt:               -bin-annot
   NativeOpt:             -bin-annot
   BuildDepends:          atdgen, biniou, yojson, uri, cohttp.lwt

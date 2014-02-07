@@ -3,6 +3,16 @@ all: build
 NAME=spotify-web
 J=4
 
+LOOKUP_MARSHAL=lib/spotify_lookup_j.ml
+LOOKUP_TYPES=lib/spotify_lookup_t.ml
+LOOKUP=$(LOOKUP_MARSHAL) $(LOOKUP_TYPES)
+
+$(LOOKUP_MARSHAL):
+	atdgen -j lib/spotify_lookup.atd
+
+$(LOOKUP_TYPES):
+	atdgen -t lib/spotify_lookup.atd
+
 SEARCH_MARSHAL=lib/spotify_search_j.ml
 SEARCH_TYPES=lib/spotify_search_t.ml
 SEARCH=$(SEARCH_MARSHAL) $(SEARCH_TYPES)
@@ -19,7 +29,7 @@ setup.ml: _oasis
 setup.data: setup.ml
 	ocaml setup.ml -configure
 
-build: setup.data setup.ml $(SEARCH)
+build: setup.data setup.ml $(LOOKUP) $(SEARCH)
 	ocaml setup.ml -build -j $(J)
 
 install: setup.data setup.ml
@@ -34,6 +44,8 @@ reinstall: setup.ml
 
 clean:
 	ocamlbuild -clean
+	rm -f lib/spotify_lookup_j.ml*
+	rm -f lib/spotify_lookup_t.ml*
 	rm -f lib/spotify_search_j.ml*
 	rm -f lib/spotify_search_t.ml*
 	rm -f setup.data setup.log

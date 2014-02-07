@@ -1,0 +1,55 @@
+type availability = {
+  territories: string;
+}
+
+type external_id = {
+  id_type <json name="type">: string;
+  id: string;
+}
+
+type lookup_info = {
+  info_type <json name="type">: string;
+}
+
+type artist = {
+  ~href <json name="href">: string;
+  ~name <json name="name">: string;
+} <ocaml field_prefix="artist_">
+
+type album = {
+  ?artist_id <json name="artist-id">: string option;
+  name: string;
+  ?artist: string option;
+  ?external_ids <json name="external-ids">: external_id list option;
+  released: int;
+  href: string;
+  ?availability: availability option;
+} <ocaml field_prefix="album_">
+
+type track = {
+  available: bool;
+  album: album;
+  name: string;
+  popularity: float;
+  external_ids <json name="external-ids">: external_id list;
+  length: float;
+  href: string;
+  artists: artist list;
+  availability: availability;
+  track_number <json name="track-number">: int;
+} <ocaml field_prefix="track_">
+
+type artist_lookup = {
+  album_lookup_info <json name="info">: lookup_info;
+  artist: artist;
+}
+
+type album_lookup = {
+  album_lookup_info <json name="info">: lookup_info;
+  album: album;
+}
+
+type track_lookup = {
+  track_lookup_info <json name="info">: lookup_info;
+  track: track;
+}
