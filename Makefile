@@ -1,12 +1,11 @@
-.PHONY: install uninstall clean
+all: build
+
+NAME=spotify-web
+J=4
 
 SEARCH_MARSHAL=lib/spotify_search_j.ml
 SEARCH_TYPES=lib/spotify_search_t.ml
 SEARCH=$(SEARCH_MARSHAL) $(SEARCH_TYPES)
-
-dist/build/lib-spotify_web/spotify_web.cma: $(SEARCH)
-	obuild configure
-	obuild build
 
 $(SEARCH_MARSHAL):
 	atdgen -j lib/spotify_search.atd
@@ -14,14 +13,27 @@ $(SEARCH_MARSHAL):
 $(SEARCH_TYPES):
 	atdgen -t lib/spotify_search.atd
 
-install:
-	ocamlfind install spotify-web lib/META \
-		$(wildcard dist/build/lib-spotify_web/*)
+setup.ml: _oasis
+	oasis setup
+
+setup.data: setup.ml
+	ocaml setup.ml -configure
+
+build: setup.data setup.ml $(SEARCH)
+	ocaml setup.ml -build -j $(J)
+
+install: setup.data setup.ml
+	ocaml setup.ml -install
 
 uninstall:
-	ocamlfind remove spotify-web
+	ocamlfind remove $(NAME)
+
+reinstall: setup.ml
+	ocamlfind remove $(NAME) || true
+	ocaml setup.ml -reinstall
 
 clean:
+	ocamlbuild -clean
 	rm -f lib/spotify_search_j.ml*
 	rm -f lib/spotify_search_t.ml*
-	rm -rf dist
+	rm -f setup.data setup.log

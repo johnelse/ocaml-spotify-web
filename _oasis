@@ -1,0 +1,18 @@
+OASISFormat: 0.3
+Name:        spotify-web
+Version:     0.1.0
+Synopsis:    Library for interacting with the Spotify web API
+License:     MIT
+Authors:     John Else
+Copyrights:  (C) 2013 John Else
+BuildTools:  ocamlbuild
+Plugins:     META (0.3)
+
+Library spotify_web
+  CompiledObject:        best
+  Path:                  lib
+  Findlibname:           spotify-web
+  Modules:               Spotify_search_t, Spotify_search_j, Spotify_lookup, Spotify_search
+  ByteOpt:               -bin-annot
+  NativeOpt:             -bin-annot
+  BuildDepends:          atdgen, biniou, yojson, uri, cohttp.lwt
