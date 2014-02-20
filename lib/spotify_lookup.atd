@@ -40,7 +40,7 @@ type track = {
 } <ocaml field_prefix="track_">
 
 type artist_lookup = {
-  album_lookup_info <json name="info">: lookup_info;
+  artist_lookup_info <json name="info">: lookup_info;
   artist: artist;
 }
 
