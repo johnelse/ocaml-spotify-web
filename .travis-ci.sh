@@ -1,5 +1,5 @@
 # OPAM packages needed to build tests.
-OPAM_PACKAGES="lwt atdgen biniou yojson uri cohttp"
+OPAM_PACKAGES="lwt atdgen biniou yojson uri"
 
 
 case "$OCAML_VERSION,$OPAM_VERSION" in
@@ -23,10 +23,9 @@ echo OPAM versions
 opam --version
 opam --git-version
 
-opam init 
-opam remote add xapi-project git://github.com/xapi-project/opam-repo-dev
-opam pin cohttp 0.9.12
+opam init
 opam install ${OPAM_PACKAGES}
+opam install cohttp
 
 eval `opam config -env`
 make
