@@ -1,5 +1,5 @@
 (* OASIS_START *)
-(* DO NOT EDIT (digest: 461a70c0e7fad735fec5f7667386039f) *)
+(* DO NOT EDIT (digest: 2e69ca88aedadb6f7efcdc37aac78845) *)
 module OASISGettext = struct
 (* # 21 "src/oasis/OASISGettext.ml" *)
 
@@ -495,7 +495,7 @@ let package_default =
           (["oasis_library_spotify_web_native"; "ocaml"; "compile"; "native"],
             [(OASISExpr.EBool true, S [A "-bin-annot"])])
        ];
-     includes = []
+     includes = [("test", ["lib"])]
   }
   ;;
 

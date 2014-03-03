@@ -16,3 +16,14 @@ Library spotify_web
   ByteOpt:               -bin-annot
   NativeOpt:             -bin-annot
   BuildDepends:          atdgen, biniou, yojson, uri, cohttp.lwt
+
+Executable test_main
+  Build$:                flag(tests)
+  Path:                  test
+  MainIs:                test_main.ml
+  Install:               false
+  BuildDepends:          oUnit, spotify-web
+
+Test test_main
+  Command:               $test_main
+  WorkingDirectory:      test

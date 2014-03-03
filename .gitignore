@@ -7,3 +7,5 @@ lib/spotify_search_t.ml*
 _build
 setup.data
 setup.log
+
+test_main.byte

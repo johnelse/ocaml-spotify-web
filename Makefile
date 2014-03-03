@@ -3,6 +3,8 @@ all: build
 NAME=spotify-web
 J=4
 
+TESTS_FLAG=--enable-tests
+
 LOOKUP_MARSHAL=lib/spotify_lookup_j.ml
 LOOKUP_TYPES=lib/spotify_lookup_t.ml
 LOOKUP=$(LOOKUP_MARSHAL) $(LOOKUP_TYPES)
@@ -27,10 +29,13 @@ setup.ml: _oasis
 	oasis setup
 
 setup.data: setup.ml
-	ocaml setup.ml -configure
+	ocaml setup.ml -configure $(TESTS_FLAG)
 
 build: setup.data setup.ml $(LOOKUP) $(SEARCH)
 	ocaml setup.ml -build -j $(J)
+
+test: setup.ml build
+	ocaml setup.ml -test
 
 install: setup.data setup.ml
 	ocaml setup.ml -install
