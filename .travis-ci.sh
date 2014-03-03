@@ -29,3 +29,4 @@ opam install cohttp
 
 eval `opam config -env`
 make
+make test
