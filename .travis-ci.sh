@@ -24,7 +24,6 @@ opam --version
 opam --git-version
 
 opam init
-opam pin cohttp 0.9.12
 opam install ${OPAM_PACKAGES}
 opam install cohttp
 
