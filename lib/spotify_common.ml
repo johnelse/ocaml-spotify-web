@@ -8,7 +8,6 @@ let string_of_mode = function
   | `track -> "track"
 
 exception Invalid_href
-exception No_response
 
 module C = Cohttp_lwt_unix
 
@@ -26,9 +25,6 @@ let check_href mode href =
 let read_uri uri parse_fn =
   let open Cohttp_lwt_unix_io in
   C.Client.call ~chunked:false `GET uri
-  >>= (fun result ->
-    match result with
-    | Some (_, body) ->
-      Cohttp_lwt_body.string_of_body body
-      >>= (fun data -> return (parse_fn data))
-    | none -> Lwt.fail No_response)
+  >>= (fun (_, body) ->
+    Cohttp_lwt_body.to_string body
+    >>= (fun data -> return (parse_fn data)))

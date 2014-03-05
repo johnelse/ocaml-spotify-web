@@ -1,5 +1,4 @@
 exception Invalid_href
-exception No_response
 
 type mode = [ `album | `artist | `track ]
 
