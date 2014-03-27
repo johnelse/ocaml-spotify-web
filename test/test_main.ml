@@ -29,6 +29,21 @@ let test_check_href =
           ~mode:`track
           ~input:"spotify:track:0123456789012345678901"
           ~expected_output:Ok;
+      "test_garbage_album" >::
+        test ~msg:"Checking that garbage fails to parse as a album href"
+          ~mode:`album
+          ~input:"spotify:wmnermfg:diobvdfjk"
+          ~expected_output:(Exception Spotify_common.Invalid_href);
+      "test_garbage_artist" >::
+        test ~msg:"Checking that garbage fails to parse as a artist href"
+          ~mode:`artist
+          ~input:"spotify:wmnermfg:diobvdfjk"
+          ~expected_output:(Exception Spotify_common.Invalid_href);
+      "test_garbage_track" >::
+        test ~msg:"Checking that garbage fails to parse as a track href"
+          ~mode:`track
+          ~input:"spotify:wmnermfg:diobvdfjk"
+          ~expected_output:(Exception Spotify_common.Invalid_href);
     ]
 
 let base_suite =
