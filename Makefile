@@ -5,25 +5,15 @@ J=4
 
 TESTS_FLAG=--enable-tests
 
-LOOKUP_MARSHAL=lib/spotify_lookup_j.ml
-LOOKUP_TYPES=lib/spotify_lookup_t.ml
-LOOKUP=$(LOOKUP_MARSHAL) $(LOOKUP_TYPES)
+ATDGEN_FILES=$(wildcard lib/*.atd)
+ATDGEN_J_FILES=$(ATDGEN_FILES:.atd=_j.ml)
+ATDGEN_T_FILES=$(ATDGEN_FILES:.atd=_t.ml)
 
-$(LOOKUP_MARSHAL):
-	atdgen -j lib/spotify_lookup.atd
+lib/%_j.ml: lib/%.atd
+	atdgen -j $<
 
-$(LOOKUP_TYPES):
-	atdgen -t lib/spotify_lookup.atd
-
-SEARCH_MARSHAL=lib/spotify_search_j.ml
-SEARCH_TYPES=lib/spotify_search_t.ml
-SEARCH=$(SEARCH_MARSHAL) $(SEARCH_TYPES)
-
-$(SEARCH_MARSHAL):
-	atdgen -j lib/spotify_search.atd
-
-$(SEARCH_TYPES):
-	atdgen -t lib/spotify_search.atd
+lib/%_t.ml: lib/%.atd
+	atdgen -t $<
 
 setup.ml: _oasis
 	oasis setup
@@ -31,7 +21,7 @@ setup.ml: _oasis
 setup.data: setup.ml
 	ocaml setup.ml -configure $(TESTS_FLAG)
 
-build: setup.data setup.ml $(LOOKUP) $(SEARCH)
+build: setup.data setup.ml $(ATDGEN_J_FILES) $(ATDGEN_T_FILES)
 	ocaml setup.ml -build -j $(J)
 
 test: setup.ml build
@@ -49,8 +39,6 @@ reinstall: setup.ml
 
 clean:
 	ocamlbuild -clean
-	rm -f lib/spotify_lookup_j.ml*
-	rm -f lib/spotify_lookup_t.ml*
-	rm -f lib/spotify_search_j.ml*
-	rm -f lib/spotify_search_t.ml*
+	$(foreach FILE, $(ATDGEN_J_FILES), rm -f $(FILE)*)
+	$(foreach FILE, $(ATDGEN_T_FILES), rm -f $(FILE)*)
 	rm -f setup.data setup.log
