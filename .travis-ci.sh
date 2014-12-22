@@ -1,5 +1,5 @@
 # OPAM packages needed to build tests.
-OPAM_PACKAGES="lwt atdgen biniou yojson uri"
+OPAM_PACKAGES="lwt atdgen biniou yojson uri ssl cohttp ounit"
 
 
 case "$OCAML_VERSION,$OPAM_VERSION" in
@@ -25,7 +25,6 @@ opam --git-version
 
 opam init
 opam install ${OPAM_PACKAGES}
-opam install cohttp
 
 eval `opam config -env`
 make
