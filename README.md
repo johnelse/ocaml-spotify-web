@@ -7,7 +7,7 @@ service. Please use [ocaml-spotify-web-api](https://github.com/johnelse/ocaml-sp
 ocaml-spotify-web [![Build status](https://travis-ci.org/johnelse/ocaml-spotify-web.png?branch=master)](https://travis-ci.org/johnelse/ocaml-spotify-web)
 =========
 
-OCaml bindings for the [spotify web API](https://developer.spotify.com/technologies/web-api/).
+OCaml bindings for the [spotify metadata API](https://developer.spotify.com/technologies/metadata-api/).
 
 Dependencies:
 
